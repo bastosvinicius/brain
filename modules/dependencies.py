@@ -1,0 +1,7 @@
+# check pre-reqs
+
+dependencies = {
+  'termcolor': '1.1.0',
+  'progressbar': '2.5',
+  'pyzabbix': '0.7.4'
+}
