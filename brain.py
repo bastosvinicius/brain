@@ -10,18 +10,30 @@ localmodules = localpath+"/modules"
 localconfig = localpath+"/.config"
 sys.path.insert(0, localmodules)
 
+# dictionaries
+
+dependencies = {
+  'termcolor': '1.1.0',
+  'progressbar': '2.5',
+  'pyzabbix': '0.7.4'
+}
+
+
 # local modules
 
 import menu, internet
 
 print("hi, i'm brain")
 print("i'll help you to do some things that zabbix can offer you with python lang")
+print("let me test some things before we start")
+print("")
 
 try:
   internet.internet()
 except:
   print("no internet connection")
 
+print("testing modules dependencies")
 try:
   pkg_resources.require(dependencies)
   print("all dependencies are satisfied")
