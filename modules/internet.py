@@ -1,4 +1,5 @@
 def internet():
+  print("testing internet connection")
   from urllib.request import urlopen
   try:
     urlopen("http://www.google.com/", timeout=5)
