@@ -18,7 +18,6 @@ dependencies = {
   'pyzabbix': '0.7.4'
 }
 
-
 # local modules
 
 import menu, internet
