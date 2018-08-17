@@ -1,5 +1,6 @@
 from termcolor import colored
 def menu():
+  print("")
   print(colored('hello', 'blue'), ("d(-_-)b"), colored('world', 'blue'))
   print("welcome to brain\n")
   print("this script helps u to extract infos from zabbix, mass insert of hosts, items, triggers or users, get information from hosts and install, uninstall or upgrade agents")
