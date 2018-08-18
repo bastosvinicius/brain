@@ -23,14 +23,10 @@ dependencies = {
 import menu, internet
 
 print("hi, i'm brain")
-print("i'll help you to do some things that zabbix can offer you with python lang")
+print("i'll help you to do some things with python")
+print("")
 print("let me test some things before we start")
 print("")
-
-try:
-  internet.internet()
-except:
-  print("no internet connection")
 
 print("testing modules dependencies")
 try:
@@ -38,11 +34,19 @@ try:
   print("all dependencies are satisfied")
 except:
   print("not all dependencies were met")
-  print("trying to install the dependencies")
+  print("trying to install dependencies")
+  print("testing your internet connection")
   try:
-    os.system('pip3.4 install -r '+localconfig+'/modules-requiriments > /dev/null')
+    internet.internet()
+    print("trying to install the dependencies")
+    try:
+      os.system('pip3.4 install -r '+localconfig+'/modules-requiriments > /dev/null')
+    except:
+      print("failed to install dependencies")
+      print("quitting")
+      quit()
   except:
-    print("failed to install dependencies")
+    print("no internet connection")
     print("quitting")
     quit()
 
