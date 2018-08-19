@@ -18,36 +18,41 @@ dependencies = {
   'pyzabbix': '0.7.4'
 }
 
+report = {
+  'users': '[USER REPORT]'
+}
+
 # local modules
 
-import menu, internet
+import menu, internet, this
 
-print("hi, i'm brain")
-print("i'll help you to do some things with python")
-print("")
-print("let me test some things before we start")
-print("")
+print('')
+print('hi, i\'m brain')
+print('i\'ll help you to do some things with python')
+print('')
+print('let me test some things before we start')
+print('')
 
-print("testing modules dependencies")
+print('testing modules dependencies')
 try:
   pkg_resources.require(dependencies)
-  print("all dependencies are satisfied")
+  print('all dependencies are satisfied')
 except:
-  print("not all dependencies were met")
-  print("trying to install dependencies")
-  print("testing your internet connection")
+  print('not all dependencies were met')
+  print('trying to install dependencies')
+  print('testing your internet connection')
   try:
     internet.internet()
-    print("trying to install the dependencies")
+    print('trying to install the dependencies')
     try:
       os.system('pip3.4 install -r '+localconfig+'/modules-requiriments > /dev/null')
     except:
-      print("failed to install dependencies")
-      print("quitting")
+      print('failed to install dependencies')
+      print('quitting')
       quit()
   except:
-    print("no internet connection")
-    print("quitting")
+    print('no internet connection')
+    print('quitting')
     quit()
 
 # py modules
