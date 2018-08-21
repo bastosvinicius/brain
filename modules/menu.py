@@ -1,5 +1,5 @@
 from termcolor import colored
-import mzabbix
+import mzabbix, sys
 
 def menu():
   print("")
@@ -17,6 +17,12 @@ def menu():
   if option == '1':
     print("extract data menu\n")
     mzabbix.mzabbix()
+  elif option == '2':
+    print("TO DO")
+    sys.exit()
   elif option == 'q':
     print("quiting\n")
-    quit()
+    sys.exit()
+  else:
+    print('unknown option')
+    menu()
