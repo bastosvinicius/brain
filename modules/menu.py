@@ -24,8 +24,10 @@ def menu():
     print('TO DO')
     sys.exit()
   elif option == 'q':
-    print('quiting\n')
+    print('going out\nhope u come back soon :D')
     sys.exit(0)
   else:
     print('unknown option')
+    print('its only 3 options')
+    print('pay attention <3')
     menu()
