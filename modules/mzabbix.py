@@ -1,4 +1,4 @@
-#!/bin/python3.4
+#!/usr/bin/python3
 
 from termcolor import colored
 from pyzabbix import ZabbixAPI
@@ -33,7 +33,7 @@ def mzabbix():
     elif option == 'b':
       extract()
     elif option == 'q':
-      sys.exit()
+      sys.exit(0)
     else:
       print('unknown option')
       sendinfotype()
@@ -70,7 +70,7 @@ def mzabbix():
       menu.menu()
     elif option == 'q':
       print('quiting\n')
-      sys.exit()
+      sys.exit(0)
     else:
       print('unknown option')
       default_menu()
@@ -79,8 +79,9 @@ def mzabbix():
     output = open('/tmp/users-report.tmp', 'w')
     file = '/tmp/users-report.tmp'
     try:
-      for row in zapi.user.get(output="extend"):
-        print(row['userid'],',', row['alias'],',', row['name'], row['surname'], file=output)
+      for row in zapi.user.get(output=["userid", "alias", "name", "surname"], selectMediatypes="mediatypes", selectUsrgrps="usrgrps"):
+        print(row["userid"], row["alias"], row["name"], row["surname"], row["usrgrps"], file=output)
+      output.close()
       print('output file created on '+file+'')
       sendinfotype()
     except:
@@ -125,7 +126,7 @@ def mzabbix():
       default_menu()
     elif option == 'q':
       print("quiting\n")
-      sys.exit()
+      sys.exit(0)
     else:
       print('unknown option')
       extract()
@@ -151,12 +152,12 @@ def mzabbix():
   zbxlogin = TryConn()
   try:
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-    zapi = ZabbixAPI(server="https://<ZABBIX URL>/api_jsonrpc.php")
+    zapi = ZabbixAPI(server="https://172.17.0.2/api_jsonrpc.php")
     zapi.session.auth = (zbxlogin.getusername(), zbxlogin.getpassword())
     zapi.session.verify = False
     zapi.timeout = 10
     zapi.login(zbxlogin.getusername(), zbxlogin.getpassword())
-    print('connected to Zabbix API Version %s' % zapi.api_version())
+    print('connected to Zabbix API - Zabbix Version %s' % zapi.api_version())
     default_menu()
   except Exception:
     logging.error(traceback.format_exc())
