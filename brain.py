@@ -55,7 +55,7 @@ except:
       quit()
   except:
     print('no internet connection')
-    print('quitting')
+    print('going out :(')
     quit()
 
 # local modules
