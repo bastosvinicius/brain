@@ -1,4 +1,6 @@
-#!/bin/python3.4
+#!/usr/bin/python3
+
+# py modules
 
 import os, sys, socket, pkg_resources
 from pkg_resources import DistributionNotFound, VersionConflict
@@ -9,6 +11,7 @@ localpath = os.getcwd()
 localmodules = localpath+"/modules"
 localconfig = localpath+"/.config"
 sys.path.insert(0, localmodules)
+sys.path.append(localconfig)
 
 # dictionaries
 
@@ -24,7 +27,7 @@ report = {
 
 # local modules
 
-import menu, internet, this
+import this, internet
 
 print('')
 print('hi, i\'m brain')
@@ -45,7 +48,7 @@ except:
     internet.internet()
     print('trying to install the dependencies')
     try:
-      os.system('pip3.4 install -r '+localconfig+'/modules-requiriments > /dev/null')
+      os.system('sudo pip3 install -r '+localconfig+'/modules-requiriments > /dev/null')
     except:
       print('failed to install dependencies')
       print('quitting')
@@ -55,6 +58,8 @@ except:
     print('quitting')
     quit()
 
-# py modules
+# local modules
+
+import menu
 
 menu.menu()
