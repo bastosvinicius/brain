@@ -135,6 +135,7 @@ def mzabbix():
     os.system('clear')
     print(colored('impossible connect to Zabbix API', 'red', attrs=['bold']))
     print(colored('verify the API URL or ur credentials', 'red', attrs=['bold']))
+    print(colored('brute force not work like that', 'green', attrs=['bold']))
     menu.menu()
 
   class TryConn:
