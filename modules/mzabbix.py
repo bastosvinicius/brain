@@ -79,8 +79,9 @@ def mzabbix():
     output = open('/tmp/users-report.tmp', 'w')
     file = '/tmp/users-report.tmp'
     try:
-      for row in zapi.user.get(output=["userid", "alias", "name", "surname"], selectMediatypes="mediatypes", selectUsrgrps="usrgrps"):
-        print(row["userid"], row["alias"], row["name"], row["surname"], row["usrgrps"], file=output)
+      print('user id, alias, name, surname, groups', file=output)
+      for row in zapi.user.get(output=["userid", "alias", "name", "surname"], selectUsrgrps=["name"]):
+        print(row["userid"], row["alias"], row["name"], row["surname"], str([d["name"] for d in row["usrgrps"]]).replace(",", " |").replace("[","").replace("]",""), sep=",", file=output)
       output.close()
       print('output file created on '+file+'')
       sendinfotype()
@@ -153,7 +154,7 @@ def mzabbix():
   zbxlogin = TryConn()
   try:
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-    zapi = ZabbixAPI(server="https://172.17.0.2/api_jsonrpc.php")
+    zapi = ZabbixAPI(server="<ZABBIX URL API>/api_jsonrpc.php")
     zapi.session.auth = (zbxlogin.getusername(), zbxlogin.getpassword())
     zapi.session.verify = False
     zapi.timeout = 10
