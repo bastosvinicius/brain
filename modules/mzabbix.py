@@ -2,7 +2,7 @@
 
 from termcolor import colored
 from pyzabbix import ZabbixAPI
-import getpass, csv, os, urllib3, traceback, logging, sys
+import getpass, csv, os, urllib3, traceback, logging, sys, time
 import menu
 
 report = {
@@ -10,6 +10,24 @@ report = {
 }
 
 def mzabbix():
+
+  def html(reporttype):
+    htmlstart="""<!DOCTYPE html>
+<html>
+<body>
+
+<h1>"""+reporttype+""" Report</h1>
+
+<p></p>
+"""
+
+    def htmlmid():
+      htmlmid="""
+"""
+    htmlend="""
+</body>
+</html>
+"""
 
   def sendinfotype():
     print('')
@@ -24,16 +42,17 @@ def mzabbix():
     option = input('make ur choice: ')
     print('')
     if option == '1':
-      type = csv
-      print(str(type))
+      formattype = csv
+      print(str(formattype))
       mzabbix()
     elif option == '2':
-      type = html
+      formattype = html
+      print(str(formattype))
       mzabbix()
     elif option == 'b':
       extract()
     elif option == 'q':
-      sys.exit(0)
+      raise SystemExit()
     else:
       print('unknown option')
       sendinfotype()
@@ -70,7 +89,7 @@ def mzabbix():
       menu.menu()
     elif option == 'q':
       print('quiting\n')
-      sys.exit(0)
+      raise SystemExit()
     else:
       print('unknown option')
       default_menu()
@@ -110,9 +129,9 @@ def mzabbix():
     print('')
     if option == '1':
       print('users report\n')
+      reporttype = report['users']
       usersget()
-      type = report['users']
-      print(type)
+      print(reporttype)
     elif option == '2':
       print('all hosts registered\n')
     elif option == '3':
@@ -127,7 +146,7 @@ def mzabbix():
       default_menu()
     elif option == 'q':
       print("quiting\n")
-      sys.exit(0)
+      sys.exit()
     else:
       print('unknown option')
       extract()
@@ -154,7 +173,7 @@ def mzabbix():
   zbxlogin = TryConn()
   try:
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-    zapi = ZabbixAPI(server="<ZABBIX URL API>/api_jsonrpc.php")
+    zapi = ZabbixAPI(server="https://172.17.0.2/api_jsonrpc.php")
     zapi.session.auth = (zbxlogin.getusername(), zbxlogin.getpassword())
     zapi.session.verify = False
     zapi.timeout = 10
